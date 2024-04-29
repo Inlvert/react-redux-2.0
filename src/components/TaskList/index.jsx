@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import * as TaskActionCreators from "../../redux/actions/taskActionCreators";
-import { connect } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 
 const TaskList = (props) => {
-  const { dispatch, tasks } = props;
+  const { tasks } = useSelector((state) => state.task);
+
+  const dispatch = useDispatch();
 
   const [taskText, setTaskText] = useState("");
 
@@ -57,10 +59,12 @@ const TaskList = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    tasks: state.task.tasks,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     tasks: state.task.tasks,
+//   };
+// }
 
-export default connect(mapStateToProps)(TaskList);
+// export default connect(mapStateToProps)(TaskList);
+
+export default TaskList

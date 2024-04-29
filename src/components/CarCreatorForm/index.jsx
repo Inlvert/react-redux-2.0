@@ -1,6 +1,6 @@
 import { Form, Formik, Field } from "formik";
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as CarActionCreation from "../../redux/actions/carsActionCreators";
 
 const initialValues = {
@@ -12,7 +12,15 @@ const initialValues = {
   isLeft: "",
 };
 
-const CarCreatorForm = ({ createCarRequest }) => {
+const CarCreatorForm = (props) => {
+
+  const dispatch = useDispatch();
+
+  const createCarRequest = (carData) => {
+    dispatch(CarActionCreation.createCarRequest(carData))
+  }
+ 
+
   const hendleSubmit = (values, formikBag) => {
     const carData = {
       ...values,
@@ -48,11 +56,13 @@ const CarCreatorForm = ({ createCarRequest }) => {
   );
 };
 
-const mDtP = (dispatch) => {
-  return {
-    createCarRequest: (carData) =>
-      dispatch(CarActionCreation.createCarRequest(carData)),
-  };
-};
+// const mDtP = (dispatch) => {
+//   return {
+//     createCarRequest: (carData) =>
+//       dispatch(CarActionCreation.createCarRequest(carData)),
+//   };
+// };
 
-export default connect(null, mDtP)(CarCreatorForm);
+// export default connect(null, mDtP)(CarCreatorForm);
+
+export default CarCreatorForm

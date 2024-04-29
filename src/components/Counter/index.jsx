@@ -1,9 +1,9 @@
-import { connect, useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "../../App.css";
 import * as CounterActionCreators from "../../redux/actions/counterActionCreators";
 
 function Counter(props) {
-  const { count, step, dodatu, decrement, reset, chengeStep } = props;
+  // const { count, step, dodatu, decrement, reset, chengeStep } = props;
 
   // const hendlerIncrement = () => {
   //   const action = CounterActionCreators.increment();
@@ -32,6 +32,26 @@ function Counter(props) {
   // chengeStep(value)
   // };
 
+  const { count, step } = useSelector((state) => state.counter);
+
+  const dispatch = useDispatch();
+
+  const chengeStep = ({ target: { value } }) => {
+    dispatch(CounterActionCreators.step(+value));
+  };
+
+  const dodatu = () => {
+    dispatch(CounterActionCreators.increment());
+  };
+
+  const decrement = () => {
+    dispatch(CounterActionCreators.decrement());
+  };
+
+  const reset = () => {
+    dispatch(CounterActionCreators.reset());
+  };
+
   return (
     <div className="App-header">
       <p>Count is ${count}</p>
@@ -46,21 +66,23 @@ function Counter(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    count: state.counter.count,
-    step: state.counter.step,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     count: state.counter.count,
+//     step: state.counter.step,
+//   };
+// }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dodatu: () => dispatch(CounterActionCreators.increment()),
-    decrement: () => dispatch(CounterActionCreators.decrement()),
-    reset: () => dispatch(CounterActionCreators.reset()),
-    // chengeStep: (newStep) => dispatch(CounterActionCreators.step(+newStep))
-    chengeStep: ({ target: { value } }) =>
-      dispatch(CounterActionCreators.step(+value)),
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     dodatu: () => dispatch(CounterActionCreators.increment()),
+//     decrement: () => dispatch(CounterActionCreators.decrement()),
+//     reset: () => dispatch(CounterActionCreators.reset()),
+//     // chengeStep: (newStep) => dispatch(CounterActionCreators.step(+newStep))
+//     chengeStep: ({ target: { value } }) =>
+//       dispatch(CounterActionCreators.step(+value)),
+//   };
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+export default Counter;

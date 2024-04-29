@@ -1,6 +1,6 @@
-import { Form, Formik, Field } from "formik";
+import { Form, Formik } from "formik";
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as CarActionFinder from "../../redux/actions/carsActionCreators";
 
 const initialValues = {
@@ -8,7 +8,13 @@ const initialValues = {
 };
 
 const TakeAllCars = (props) => {
-  const { cars, findAllCarRequest } = props;
+  const { cars } = useSelector((state) => state.car);
+
+  const dispatch = useDispatch();
+
+  const findAllCarRequest = (cars) =>
+    dispatch(CarActionFinder.findAllCarsRequest(cars));
+
   const hendleSubmit = (values, formikBag) => {
     const cars = {
       ...values,
@@ -39,17 +45,19 @@ const TakeAllCars = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    cars: state.car.cars,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     cars: state.car.cars,
+//   };
+// }
 
-function mDTp(dispatch) {
-  return {
-    findAllCarRequest: (cars) =>
-      dispatch(CarActionFinder.findAllCarsRequest(cars)),
-  };
-}
+// function mDTp(dispatch) {
+//   return {
+//     findAllCarRequest: (cars) =>
+//       dispatch(CarActionFinder.findAllCarsRequest(cars)),
+//   };
+// }
 
-export default connect(mapStateToProps, mDTp)(TakeAllCars);
+// export default connect(mapStateToProps, mDTp)(TakeAllCars);
+
+export default TakeAllCars;
