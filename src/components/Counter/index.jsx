@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import "../../App.css";
 import * as CounterActionCreators from "../../redux/actions/counterActionCreators";
+import { bindActionCreators } from "redux";
+import { useCallback, useMemo } from "react";
 
 function Counter(props) {
   // const { count, step, dodatu, decrement, reset, chengeStep } = props;
@@ -36,30 +38,55 @@ function Counter(props) {
 
   const dispatch = useDispatch();
 
-  const chengeStep = ({ target: { value } }) => {
-    dispatch(CounterActionCreators.step(+value));
-  };
+  // const { increment, decrement, reset, changeStep} = bindActionCreators(
+  //   CounterActionCreators,
+  //   dispatch
+  // );
 
-  const dodatu = () => {
-    dispatch(CounterActionCreators.increment());
-  };
+  // optimization whitn useMemo();
 
-  const decrement = () => {
-    dispatch(CounterActionCreators.decrement());
-  };
+  const { increment, decrement, reset, changeStep } = useMemo(
+    () => bindActionCreators(CounterActionCreators, dispatch),
+    [dispatch]
+  );
 
-  const reset = () => {
-    dispatch(CounterActionCreators.reset());
-  };
+  // const chengeStepHendler = ({ target: { value } }) => {
+  //   changeStep(+value);
+  // };
+
+  // optimization whitn useCallback();
+
+  const chengeStepHendler = useCallback(
+    ({ target: { value } }) => {
+      changeStep(+value);
+    },
+    [changeStep]
+  );
+
+  // const chengeStepHendler = ({ target: { value } }) => {
+  //   dispatch(CounterActionCreators.step(+value));
+  // };
+
+  // const dodatu = () => {
+  //   dispatch(CounterActionCreators.increment());
+  // };
+
+  // const decrement = () => {
+  //   dispatch(CounterActionCreators.decrement());
+  // };
+
+  // const reset = () => {
+  //   dispatch(CounterActionCreators.reset());
+  // };
 
   return (
     <div className="App-header">
       <p>Count is ${count}</p>
       <p>
-        Step is: <input value={step} onChange={chengeStep} />
+        Step is: <input value={step} onChange={chengeStepHendler} />
       </p>
 
-      <button onClick={dodatu}>Increment</button>
+      <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>
       <button onClick={reset}>reset</button>
     </div>

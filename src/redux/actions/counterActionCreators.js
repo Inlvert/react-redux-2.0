@@ -15,7 +15,7 @@ export const reset = () => ({
   type: ACTION_TYPES.RESET
 })
 
-export const step = (newStep) => ({
+export const changeStep = (newStep) => ({
   type: ACTION_TYPES.STEP,
   payload: newStep
 })
