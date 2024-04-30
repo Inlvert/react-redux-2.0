@@ -86,9 +86,15 @@ function Counter(props) {
         Step is: <input value={step} onChange={chengeStepHendler} />
       </p>
 
-      <button onClick={increment}>Increment</button>
+      {/* <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>
-      <button onClick={reset}>reset</button>
+      <button onClick={reset}>reset</button> */}
+      
+      {/* для того щоб не було помилок переводимо onClick в коллбек функцію non-serializable value was detected in an action, in the path: `payload`. Value:  */}
+      
+      <button onClick={() => increment()}>Increment</button>
+      <button onClick={() => decrement()}>Decrement</button>
+      <button onClick={() => reset()}>reset</button>
     </div>
   );
 }

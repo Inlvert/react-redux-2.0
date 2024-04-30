@@ -1,21 +1,33 @@
-import ACTION_TYPES from "./actionTypes";
+import { createAction } from '@reduxjs/toolkit'
 
-export function increment () {
-  const action = {
-    type: ACTION_TYPES.INCREMENT
-  };
-  return action
-};
+// import ACTION_TYPES from "./actionTypes";
 
-export const decrement = () => ({
-  type: ACTION_TYPES.DECREMENT
-})
+// export function increment () {
+//   const action = {
+//     type: ACTION_TYPES.INCREMENT
+//   };
+//   return action
+// };
 
-export const reset = () => ({
-  type: ACTION_TYPES.RESET
-})
+export const increment = createAction('counter/increment');
 
-export const changeStep = (newStep) => ({
-  type: ACTION_TYPES.STEP,
-  payload: newStep
-})
+// export const decrement = () => ({
+//   type: ACTION_TYPES.DECREMENT
+// })
+
+export const decrement = createAction('counter/decrement');
+
+
+// export const reset = () => ({
+//   type: ACTION_TYPES.RESET
+// })
+
+export const reset = createAction('counter/reset');
+
+
+// export const changeStep = (newStep) => ({
+//   type: ACTION_TYPES.STEP,
+//   payload: newStep
+// })
+
+export const changeStep = createAction('counter/step');

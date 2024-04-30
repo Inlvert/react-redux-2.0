@@ -1,38 +1,62 @@
-import { produce } from "immer";
-import ACTION_TYPES from "../actions/actionTypes";
+// import { produce } from "immer";
+import { createReducer } from '@reduxjs/toolkit'
+// import ACTION_TYPES from "../actions/actionTypes";
+import * as ActionCreatoes from '../actions/counterActionCreators'
 
 const initialState = {
   count: 0,
   step: 1,
 };
 
-const hendlers = {
-  [ACTION_TYPES.INCREMENT]: produce((draftState, action) => {
-    draftState.count = draftState.count + draftState.step;
-  }),
-  [ACTION_TYPES.DECREMENT]: produce((draftState, action) => {
-    draftState.count = draftState.count - draftState.step;
-  }),
-  [ACTION_TYPES.RESET]: produce((draftState, action) => {
-    draftState.count = initialState.count;
-    draftState.step = initialState.step;
-  }),
-  [ACTION_TYPES.STEP]: produce((draftState, action) => {
-    draftState.step = action.payload;
-  }),
-};
+const counterReducer = createReducer(initialState, (builder) => {
+  builder.addCase(ActionCreatoes.increment.type, (state, action) => {
+    state.count = state.count + state.step
+  });
+  // builder.addCase(ActionCreatoes.increment.toString());
+  // builder.addCase(ActionCreatoes.increment);
 
-function counterReducer(state = initialState, action) {
-  const { type } = action;
+  builder.addCase(ActionCreatoes.decrement.type, (state, action) => {
+    state.count = state.count - state.step
+  });
+  builder.addCase(ActionCreatoes.reset.type, (state, action) => {
+    return initialState
+  });
+  builder.addCase(ActionCreatoes.changeStep.type, (state, action) => {
+    state.step = action.payload;
+  });
 
-  const hendler = hendlers[type];
+})
 
-  if(hendler) {
-    return hendler(state, action);
-  } else {
-    return state
-  }
-}
+
+// const hendlers = {
+//   [ActionCreatoes.increment.toString]: produce((draftState, action) => {
+//     draftState.count = draftState.count + draftState.step;
+//   }),
+//   [ActionCreatoes.decrement.type]: produce((draftState, action) => {
+//     draftState.count = draftState.count - draftState.step;
+//   }),
+//   [ActionCreatoes.reset.toString]: produce((draftState, action) => {
+//     draftState.count = initialState.count;
+//     draftState.step = initialState.step;
+//   }),
+//   [ActionCreatoes.changeStep.type]: produce((draftState, action) => {
+//     draftState.step = action.payload;
+//   }),
+// };
+
+// function counterReducer(state = initialState, action) {
+//   const { type } = action;
+
+//   const hendler = hendlers[type];
+
+//   if(hendler) {
+//     return hendler(state, action);
+//   } else {
+//     return state
+//   }
+// }
+
+
 
 // function counterReducer(state = initialState, action) {
 //   switch (action.type) {

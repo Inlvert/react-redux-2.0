@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as TaskActionCreators from "../../redux/actions/taskActionCreators";
 import { useSelector, useDispatch} from "react-redux";
+import { bindActionCreators } from "redux";
 
 const TaskList = (props) => {
   const { tasks } = useSelector((state) => state.task);
@@ -8,6 +9,12 @@ const TaskList = (props) => {
   const dispatch = useDispatch();
 
   const [taskText, setTaskText] = useState("");
+
+
+  // const result = bindActionCreators(TaskActionCreators, dispatch);
+
+  // console.log(result)
+
 
   const submitHendler = (e) => {
     e.preventDefault();
