@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as TaskActionCreators from "../../redux/actions/taskActionCreators";
 import { useSelector, useDispatch} from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators } from "@reduxjs/toolkit";
 
 const TaskList = (props) => {
   const { tasks } = useSelector((state) => state.task);

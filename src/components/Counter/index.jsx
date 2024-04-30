@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import "../../App.css";
-import * as CounterActionCreators from "../../redux/actions/counterActionCreators";
-import { bindActionCreators } from "redux";
+import * as CounterActionCreators from "../../redux/slices/counterSlice";
+import { bindActionCreators } from "@reduxjs/toolkit";
 import { useCallback, useMemo } from "react";
 
 function Counter(props) {
