@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./slices/counterSlice";
-import taskReducer from "./reducers/taskReducer";
+import taskReducer from "./slices/taskSlice";
 import userReducer from "./reducers/userReducer";
 import carReducer from "./reducers/carReducer";
 

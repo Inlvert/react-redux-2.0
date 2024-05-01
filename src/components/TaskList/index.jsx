@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as TaskActionCreators from "../../redux/actions/taskActionCreators";
+import * as TaskActionCreators from "../../redux/slices/taskSlice";
 import { useSelector, useDispatch} from "react-redux";
 import { bindActionCreators } from "@reduxjs/toolkit";
 
