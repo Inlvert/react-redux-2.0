@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./slices/counterSlice";
 import taskReducer from "./slices/taskSlice";
-import userReducer from "./reducers/userReducer";
+import userReducer from "./slices/userSlice";
 import carReducer from "./reducers/carReducer";
 
 const store = configureStore({

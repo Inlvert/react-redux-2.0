@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
-import * as UserActionCreators from "../../redux/actions/usersAction";
+import { createUser } from "../../redux/slices/userSlice";
 
 const initialValues = {
   fullName: "",
@@ -15,7 +15,7 @@ const UserCreationForm = (props) => {
   const dispatch = useDispatch();
 
   const createUserRequest = (userData) => {
-    dispatch(UserActionCreators.createUserRequest(userData));
+    dispatch(createUser(userData));
   };
 
   const handlerSubmit = (values, formikBag) => {
